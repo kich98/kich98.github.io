@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Обратный отсчет до свадьбы
-    const weddingDate = new Date("August 29, 2025 12:00:00").getTime();
+    const weddingDate = new Date("August 29, 2025 13:45:00").getTime();
     const countdownFunction = setInterval(function() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
