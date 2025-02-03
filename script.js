@@ -35,6 +35,7 @@ function toggleGuestField(show) {
         guestField.style.display = 'none';
     }
 }
+
 document.getElementById('weddingForm').addEventListener('submit', function (event) {
     event.preventDefault(); // Останавливаем стандартную отправку формы
 
