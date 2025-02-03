@@ -57,23 +57,56 @@ document.getElementById('weddingForm').addEventListener('submit', function (even
     });
 });
 
-document.getElementById('weddingForm').addEventListener('submit', function (event) {
-    event.preventDefault();
+document.getElementById('weddingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Собираем данные формы
+    const formData = {
+        name: document.getElementById('name').value,
+        with_guest: document.querySelector('input[name="with_guest"]:checked').value,
+        guest_name: document.getElementById('guest_name').value || 'Не указано',
+        attendance: document.querySelector('input[name="attendance"]:checked').value,
+        alcohol: Array.from(document.querySelectorAll('input[name="alcohol"]:checked'))
+                   .map(checkbox => checkbox.value)
+                   .join(', ') || 'Не указано'
+    };
 
-    const formData = new FormData(this);
+    // Формируем сообщение
+    const message = `Новое подтверждение:\n
+Имя: ${formData.name}
+Приведет ли гостя: ${formData.with_guest}
+Имя гостя: ${formData.guest_name}
+Придёт ли: ${formData.attendance}
+Алкоголь: ${formData.alcohol}`;
 
-    fetch('send_to_telegram.php', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data); // Показываем ответ от сервера
-    })
-    .catch(error => {
+    try {
+        // Отправляем в Telegram
+        const response = await fetch('https://api.telegram.org/bot7938944125:AAEnVj7bZnmu0NUcquTSONHH2nBCEtXnUIY/sendMessage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: '-1002333419014',
+                text: message
+            })
+        });
+
+        if (response.ok) {
+            alert('Спасибо! Ваш ответ успешно отправлен!');
+            document.getElementById('weddingForm').reset();
+        } else {
+            alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
+        }
+    } catch (error) {
         console.error('Ошибка:', error);
-        alert('Произошла ошибка при отправке формы.');
-    });
+        alert('Произошла ошибка соединения. Проверьте интернет и попробуйте снова.');
+    }
 });
 
-document.getElementById('statusMessage').innerText = 'Ваша форма успешно отправлена!';
+function toggleGuestField(show) {
+    const guestField = document.getElementById('guest_name_field');
+    const guestInput = document.getElementById('guest_name');
+    guestField.style.display = show ? 'block' : 'none';
+    if (!show) guestInput.value = '';
+}
