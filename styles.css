@@ -503,11 +503,9 @@ background-color: rgba( 0, 0, 0, 0.3)
 }
 
 h1 {
-   font-family: "Montserrat", serif;
-  font-optical-sizing: auto;
-  font-weight: 699;
-  font-style: italic; }
-    h2 {  font-family: "Montserrat", serif;
-  font-optical-sizing: auto;
-  font-weight: 397;
-  font-style: italic; }
+    font-family: "Bad Script", serif;
+  font-weight: 400;
+  font-style: normal;; }
+    h2 {   font-family: "Bad Script", serif;
+  font-weight: 400;
+  font-style: normal; }
