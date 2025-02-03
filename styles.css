@@ -502,11 +502,11 @@ background-color: rgba( 0, 0, 0, 0.3)
     animation-delay: calc(0.8s* var(--i, 1));
 }
 
- @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 
-  h1, h2 {
-            font-family: 'Marck Script', cursive;
-            text-transform: uppercase; /* Преобразуем текст в прописные буквы */
+        /* Основные стили для h1 и h2 */
+        h1, h2 {
+            font-family: 'Marck Script', cursive; /* Используем Marck Script */
             color: #333; /* Цвет текста */
             margin: 20px 0;
         }
@@ -514,6 +514,7 @@ background-color: rgba( 0, 0, 0, 0.3)
         h1 {
             font-size: 2.5rem; /* Размер шрифта для h1 */
             text-align: center; /* Выравнивание по центру */
+            text-transform: uppercase; /* Прописные буквы */
         }
 
         h2 {
