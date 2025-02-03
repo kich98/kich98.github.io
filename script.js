@@ -38,7 +38,7 @@ function toggleGuestField(show) {
 document.getElementById('weddingForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Сбор данных формы
+  // Сбор данных формы
     const formData = {
         name: document.getElementById('name').value,
         with_guest: document.querySelector('input[name="with_guest"]:checked').value,
@@ -83,3 +83,11 @@ document.getElementById('weddingForm').addEventListener('submit', async (e) => {
         alert('❌ Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
     }
 });
+
+// Управление полем для гостя
+function toggleGuestField(show) {
+    const guestField = document.getElementById('guest_name_field');
+    const guestInput = document.getElementById('guest_name');
+    guestField.style.display = show ? 'block' : 'none';
+    if (!show) guestInput.value = '';
+}
