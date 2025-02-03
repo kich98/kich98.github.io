@@ -502,10 +502,10 @@ background-color: rgba( 0, 0, 0, 0.3)
     animation-delay: calc(0.8s* var(--i, 1));
 }
 
- @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 
   h1, h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Marck Script', cursive;
             text-transform: uppercase; /* Преобразуем текст в прописные буквы */
             color: #333; /* Цвет текста */
             margin: 20px 0;
