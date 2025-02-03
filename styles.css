@@ -503,12 +503,13 @@ background-color: rgba( 0, 0, 0, 0.3)
 }
 
 h1 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 2.5rem; /* Размер шрифта */
-    font-weight: 400; /* Жирное начертание */
-    color: #2c3e50; /* Цвет текста */
-    text-align: center; /* Выравнивание по центру */
-    text-transform: uppercase; /* Прописные буквы */
-    letter-spacing: 2px; /* Расстояние между буквами */
-    margin: 20px 0;
+       font-family: 'Raleway', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-style: italic; /* Курсивное начертание */
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 20px 0
 }
