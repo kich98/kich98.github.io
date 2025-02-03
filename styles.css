@@ -173,6 +173,9 @@ justify-content: center;
 }
 
 .countdown-item span {
+    font-family: "Bad Script", serif;
+  font-weight: 400;
+  font-style: normal;
     font-size: 2em;
     font-weight: bold;
 }
