@@ -502,15 +502,5 @@ background-color: rgba( 0, 0, 0, 0.3)
     animation-delay: calc(0.8s* var(--i, 1));
 }
 
-p {
-    font-family: 'Raleway', sans-serif;
-    font-size: 1.2rem; /* Уменьшенный размер шрифта для текста */
-    font-weight: 400; /* Обычное начертание (не жирное) */
-    font-style: italic; /* Курсив */
-    color: #2c3e50; /* Цвет текста */
-    text-align: left; /* Выравнивание по левому краю (по умолчанию) */
-    text-transform: none; /* Без преобразования текста в верхний регистр */
-    letter-spacing: 0.5px; /* Меньшее расстояние между буквами */
-    line-height: 1.6; /* Межстрочный интервал для удобства чтения */
-    margin: 10px 0; /* Уменьшенные отступы */
-}
+h1 { font-family: 'Lora', serif; }
+    h2 { font-family: 'Open Sans', sans-serif; }
