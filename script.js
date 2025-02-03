@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, 1000);
 });
+
 function toggleGuestField(show) {
     const guestField = document.getElementById('guest_name_field');
     if (show) {
