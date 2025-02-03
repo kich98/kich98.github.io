@@ -36,32 +36,10 @@ function toggleGuestField(show) {
     }
 }
 
-document.getElementById('weddingForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Останавливаем стандартную отправку формы
-
-    // Собираем данные формы
-    const formData = new FormData(this);
-
-    // Отправляем данные на сервер
-    fetch('send_to_telegram.php', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.text()) // Обрабатываем ответ от сервера
-    .then(data => {
-        console.log('Успешно отправлено:', data);
-        alert('Ваша форма успешно отправлена!'); // Уведомление пользователю
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        alert('Произошла ошибка при отправке формы.'); // Уведомление об ошибке
-    });
-});
-
 document.getElementById('weddingForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Собираем данные формы
+    // Сбор данных формы
     const formData = {
         name: document.getElementById('name').value,
         with_guest: document.querySelector('input[name="with_guest"]:checked').value,
@@ -72,16 +50,15 @@ document.getElementById('weddingForm').addEventListener('submit', async (e) => {
                    .join(', ') || 'Не указано'
     };
 
-    // Формируем сообщение
-    const message = `Новое подтверждение:\n
-Имя: ${formData.name}
-Приведет ли гостя: ${formData.with_guest}
-Имя гостя: ${formData.guest_name}
-Придёт ли: ${formData.attendance}
-Алкоголь: ${formData.alcohol}`;
+    // Форматирование сообщения
+    const message = `📨 Новое подтверждение:\n
+👤 Имя: ${formData.name}
+👥 Гость: ${formData.with_guest}${formData.with_guest === 'Да' ? ` (${formData.guest_name})` : ''}
+✅ Присутствие: ${formData.attendance}
+🍷 Алкоголь: ${formData.alcohol}`;
 
     try {
-        // Отправляем в Telegram
+        // Отправка в Telegram
         const response = await fetch('https://api.telegram.org/bot7938944125:AAEnVj7bZnmu0NUcquTSONHH2nBCEtXnUIY/sendMessage', {
             method: 'POST',
             headers: {
@@ -89,23 +66,32 @@ document.getElementById('weddingForm').addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({
                 chat_id: '-1002333419014',
-                text: message
+                text: message,
+                parse_mode: 'HTML'
             })
         });
 
+        // Обработка ответа
         if (response.ok) {
-            alert('Спасибо! Ваш ответ успешно отправлен!');
+            alert('✅ Ваш ответ успешно отправлен!');
             document.getElementById('weddingForm').reset();
+            document.getElementById('guest_name_field').style.display = 'none';
         } else {
-            alert('Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
+            throw new Error('Ошибка сервера');
         }
     } catch (error) {
         console.error('Ошибка:', error);
-        alert('Произошла ошибка соединения. Проверьте интернет и попробуйте снова.');
+        alert('❌ Произошла ошибка при отправке. Пожалуйста, попробуйте ещё раз.');
     }
 });
 
+// Управление полем для гостя
 function toggleGuestField(show) {
+    const guestField = document.getElementById('guest_name_field');
+    const guestInput = document.getElementById('guest_name');
+    guestField.style.display = show ? 'block' : 'none';
+    if (!show) guestInput.value = '';
+}
     const guestField = document.getElementById('guest_name_field');
     const guestInput = document.getElementById('guest_name');
     guestField.style.display = show ? 'block' : 'none';
