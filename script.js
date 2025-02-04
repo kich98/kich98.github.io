@@ -1,8 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Настройка задержек для всех элементов с классом fade-in
-    const fadeElements = document.querySelectorAll('.fade-in-left,.fade-in,.fade-in-right');
+    const fadeElements = document.querySelectorAll('.fade-in-left, .fade-in, .fade-in-right');
     fadeElements.forEach((el, index) => {
         el.style.setProperty('--i', index + 1);
+    });
+
+    // Создаем Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Прекращаем наблюдение после появления
+            }
+        });
+    }, {
+        threshold: 0.1 // Элемент считается видимым, когда 10% его площади находится в области видимости
+    });
+
+    // Наблюдаем за всеми элементами с классами fade-in, fade-in-left, fade-in-right
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+        observer.observe(el);
     });
 
     // Обратный отсчет до свадьбы
@@ -27,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, 1000);
 });
+
 
 function toggleGuestField(show) {
     const guestField = document.getElementById('guest_name_field');
