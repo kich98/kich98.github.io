@@ -91,23 +91,7 @@ justify-content: center;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0);
 }
 
-/* Анимация появления */
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-    animation-delay: calc(0.3s * var(--i)); /* Задержка для каждого элемента */
-}
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 
 
@@ -220,9 +204,7 @@ form input[type="submit"] {
 
 /* Общие стили для мобильных устройств */
 @media (max-width: 400px) {
-    .fade-in {
-        animation-delay: calc(0.8s * var(--i, 1));
-    }
+  
 
     .invitations {
         padding: 20px; /* Уменьшаем отступы для мобильных устройств */
@@ -273,19 +255,7 @@ form input[type="submit"] {
     }
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: calc(0.8s * var(--i, 1));
-}
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .map-container {
     margin: 25px 0;
@@ -471,41 +441,7 @@ background-color: rgba( 0, 0, 0, 0.3)
 }
 
 
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
-.fade-in-left {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInLeft  1s ease-out forwards;
-    animation-delay: calc(0.8s* var(--i, 1));
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(100%); /* Начальное положение: справа за пределами экрана */
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0); /* Конечное положение: на своем месте */
-    }
-}
-
-.fade-in-right {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInRight  1s ease-out forwards;
-    animation-delay: calc(0.8s* var(--i, 1));
-}
 
 h1 {
     font-family: "Bad Script", serif;
@@ -515,4 +451,62 @@ h1 {
   font-weight: 400;
   font-style: normal; }
 
+
+
+/* Анимация появления */
+.fade-in, .fade-in-left, .fade-in-right {
+    opacity: 0;
+    transition: opacity 2s ease-out, transform 2s ease-out; /* Увеличиваем время анимации */
+}
+
+.fade-in {
+    transform: translateY(20px);
+}
+
+.fade-in-left {
+    transform: translateX(-100%);
+}
+
+.fade-in-right {
+    transform: translateX(100%);
+}
+
+/* Анимация при появлении */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Задержка для каждого элемента */
+.fade-in:nth-child(1) { transition-delay: 0.5s; }
+.fade-in:nth-child(2) { transition-delay: 1s; }
+.fade-in:nth-child(3) { transition-delay: 1.5s; }
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease-out, transform 2s ease-out; /* Увеличиваем время анимации */
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 2s ease-out, transform 2s ease-out; /* Увеличиваем время анимации */
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 2s ease-out, transform 2s ease-out; /* Увеличиваем время анимации */
+}
 
